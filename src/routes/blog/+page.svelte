@@ -1,10 +1,10 @@
 <svelte:head>
-    <title>Blog — OSS Labs</title>
+    <title>Blog - OSS Labs</title>
     <meta
         name="description"
         content="Technical deep dives, project updates, and reflections from the OSS Labs community. Writing about building open source developer tools."
     />
-    <meta property="og:title" content="Blog — OSS Labs" />
+    <meta property="og:title" content="Blog - OSS Labs" />
     <meta
         property="og:description"
         content="Technical deep dives, project updates, and reflections from the OSS Labs community."
@@ -14,7 +14,7 @@
     <meta property="og:site_name" content="OSS Labs" />
     <meta property="og:locale" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Blog — OSS Labs" />
+    <meta name="twitter:title" content="Blog - OSS Labs" />
     <meta
         name="twitter:description"
         content="Technical deep dives, project updates, and reflections from the OSS Labs community."

@@ -33,12 +33,12 @@
 </script>
 
 <svelte:head>
-    <title>Projects — OSS Labs</title>
+    <title>Projects - OSS Labs</title>
     <meta
         name="description"
         content="Open source developer tools built and maintained by the OSS Labs community."
     />
-    <meta property="og:title" content="Projects — OSS Labs" />
+    <meta property="og:title" content="Projects - OSS Labs" />
     <meta
         property="og:description"
         content="Open source developer tools built and maintained by the OSS Labs community."
@@ -48,17 +48,23 @@
     <meta property="og:site_name" content="OSS Labs" />
     <meta property="og:locale" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Projects — OSS Labs" />
+    <meta name="twitter:title" content="Projects - OSS Labs" />
     <meta
         name="twitter:description"
         content="Open source developer tools built and maintained by the OSS Labs community."
     />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://ossl.dev/projects" />
-    <meta property="og:image" content="https://ossl.dev/og-images/projects.png" />
+    <meta
+        property="og:image"
+        content="https://ossl.dev/og-images/projects.png"
+    />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta name="twitter:image" content="https://ossl.dev/og-images/projects.png" />
+    <meta
+        name="twitter:image"
+        content="https://ossl.dev/og-images/projects.png"
+    />
 </svelte:head>
 
 <section class="page-hero" aria-labelledby="projects-heading">

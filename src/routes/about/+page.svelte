@@ -1,10 +1,10 @@
 <svelte:head>
-    <title>About — OSS Labs</title>
+    <title>About - OSS Labs</title>
     <meta
         name="description"
         content="Learn about OSS Labs, a community of open source engineers. How we work, what we believe, and how to get involved."
     />
-    <meta property="og:title" content="About — OSS Labs" />
+    <meta property="og:title" content="About - OSS Labs" />
     <meta
         property="og:description"
         content="Learn about OSS Labs, a community of open source engineers. How we work and how to get involved."
@@ -14,7 +14,7 @@
     <meta property="og:site_name" content="OSS Labs" />
     <meta property="og:locale" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="About — OSS Labs" />
+    <meta name="twitter:title" content="About - OSS Labs" />
     <meta
         name="twitter:description"
         content="Learn about OSS Labs, a community of open source engineers."
