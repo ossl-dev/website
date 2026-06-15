@@ -9,7 +9,7 @@
 
 ## Projects
 - genesis (TypeScript): https://github.com/ossl-dev/genesis - Declarative, cross-platform developer environment provisioning engine.
-- zinc (Rust, 62 stars): https://zinc.ossl.dev - Universal Shared Memory. Fast, cross-language memory sharing.
+- zinc (Rust): https://zinc.ossl.dev - Universal Shared Memory. Fast, cross-language memory sharing.
 - pylon (TypeScript): https://github.com/ossl-dev/pylon - Dead simple API versioning.
 
 ## Community

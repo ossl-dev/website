@@ -7,7 +7,6 @@
             description:
                 "Declarative, cross-platform developer environment provisioning. Define your toolchain, SDKs, and config as code. One command to recreate the exact same environment everywhere.",
             language: "TypeScript",
-            stars: 1,
             url: "https://github.com/ossl-dev/genesis",
             topics: ["developer-tools", "devops", "dx", "cross-platform"],
         },
@@ -16,7 +15,6 @@
             description:
                 "Universal Shared Memory. A high-performance shared memory library in Rust with bindings for C, Python, Node, and Go. Zero-copy data sharing across language boundaries.",
             language: "Rust",
-            stars: 62,
             url: "https://zinc.ossl.dev",
             topics: ["memory", "systems", "cross-language", "ffi"],
         },
@@ -25,7 +23,6 @@
             description:
                 "Dead simple API versioning. Works with Express, Fastify, Hono, and anything middleware-shaped. Clean routing, minimal overhead, no codebase restructuring required.",
             language: "TypeScript",
-            stars: 0,
             url: "https://github.com/ossl-dev/pylon",
             topics: ["api", "versioning", "backend", "http"],
         },

@@ -36,7 +36,6 @@ no enterprise sales pipeline. Just good work, done carefully, in public.
 ### genesis
 - URL: https://github.com/ossl-dev/genesis
 - Language: TypeScript
-- Stars: 1
 - Description: Declarative, cross-platform developer environment provisioning
   engine. Define your toolchain, SDKs, and config as code. One command to
   recreate the exact same environment everywhere.
@@ -45,7 +44,6 @@ no enterprise sales pipeline. Just good work, done carefully, in public.
 ### zinc
 - URL: https://zinc.ossl.dev
 - Language: Rust
-- Stars: 62
 - Description: Universal Shared Memory. A high-performance shared memory
   library in Rust with bindings for C, Python, Node, and Go. Zero-copy data
   sharing across language boundaries.
@@ -54,7 +52,6 @@ no enterprise sales pipeline. Just good work, done carefully, in public.
 ### pylon
 - URL: https://github.com/ossl-dev/pylon
 - Language: TypeScript
-- Stars: 0
 - Description: Dead simple API versioning. Works with Express, Fastify, Hono,
   and anything middleware-shaped. Clean routing, minimal overhead, no codebase
   restructuring required.
