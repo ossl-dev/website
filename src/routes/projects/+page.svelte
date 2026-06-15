@@ -69,7 +69,8 @@
     </p>
 </section>
 
-<section class="section" aria-label="Project list">
+<section class="section" aria-labelledby="project-list-heading">
+    <h2 id="project-list-heading" class="sr-only">Project list</h2>
     <div class="projects-grid" role="list">
         {#each projects as project}
             <div role="listitem">

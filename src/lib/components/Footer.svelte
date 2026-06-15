@@ -22,13 +22,13 @@
 
         <div class="footer-grid">
             <div class="footer-col">
-                <h4>Site</h4>
+                <h2 class="footer-heading">Site</h2>
                 <a href="/">Home</a>
                 <a href="/projects">Projects</a>
                 <a href="/about">About</a>
             </div>
             <div class="footer-col">
-                <h4>Community</h4>
+                <h2 class="footer-heading">Community</h2>
                 <a
                     href="https://github.com/ossl-dev"
                     target="_blank"
@@ -95,7 +95,7 @@
         min-width: 100px;
     }
 
-    .footer-col h4 {
+    .footer-heading {
         font-size: 0.6875rem;
         font-weight: 550;
         text-transform: uppercase;

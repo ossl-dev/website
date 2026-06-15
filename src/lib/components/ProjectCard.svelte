@@ -137,8 +137,8 @@
     font-size: 0.65625rem;
     padding: 0.09375rem 0.4375rem;
     border-radius: 100px;
-    background: rgba(245, 240, 235, 0.05);
-    color: var(--text-muted);
+    background: rgba(245, 240, 235, 0.08);
+    color: var(--text-secondary);
     font-family: var(--font-mono);
   }
 </style>

@@ -20,6 +20,7 @@
                 alt=""
                 aria-hidden="true"
                 class="logo-mark"
+                fetchpriority="high"
             />
             <span class="logo-text">OSS Labs</span>
         </a>
