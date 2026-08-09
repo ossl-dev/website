@@ -29,6 +29,15 @@
             url: "https://github.com/ossl-dev/pylon",
             topics: ["api", "versioning", "backend"],
         },
+        {
+            name: "differens",
+            description:
+                "A diff engine that tells you what actually happened to your code — moved, renamed, extracted, reformatted — instead of which lines changed. Algorithm-first, AI-optional.",
+            language: "TypeScript",
+            stars: 0,
+            url: "https://github.com/ossl-dev/differens",
+            topics: ["diff", "analysis", "developer-tools"],
+        },
     ];
 </script>
 
