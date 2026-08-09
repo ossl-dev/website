@@ -32,7 +32,7 @@
         {
             name: "differens",
             description:
-                "A diff engine that tells you what actually happened to your code — moved, renamed, extracted, reformatted — instead of which lines changed. Algorithm-first, AI-optional.",
+                "A diff engine that tells you what actually happened to your code, moved, renamed, extracted, reformatted, instead of which lines changed. Algorithm-first, AI-optional, works with or without git.",
             language: "TypeScript",
             stars: 0,
             url: "https://github.com/ossl-dev/differens",

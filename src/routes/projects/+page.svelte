@@ -29,7 +29,7 @@
         {
             name: "differens",
             description:
-                "Understand what actually changed in your code. Detects moved functions, renamed identifiers, extracted blocks, and reformatting — not just line diffs. Algorithm-first, AI-optional, works with or without git.",
+                "A diff engine that tells you what actually happened to your code, moved, renamed, extracted, reformatted, instead of which lines changed. Algorithm-first, AI-optional, works with or without git.",
             language: "TypeScript",
             url: "https://github.com/ossl-dev/differens",
             topics: ["diff", "analysis", "developer-tools", "refactoring"],
