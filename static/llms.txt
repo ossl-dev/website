@@ -6,18 +6,19 @@
 
 - [Home](https://ossl.dev)
 - [Projects](https://ossl.dev/projects)
+- [Blog](https://ossl.dev/blog)
 - [About](https://ossl.dev/about)
 
 ## Projects
 
-- [genesis](https://github.com/ossl-dev/genesis): Declarative, cross-platform developer environment provisioning engine. TypeScript.
-- [zinc](https://zinc.ossl.dev): Universal Shared Memory. Fast, cross-language memory sharing. Rust.
-- [pylon](https://github.com/ossl-dev/pylon): Dead simple API versioning. TypeScript.
+- [genesis](https://ossl.dev/projects/genesis): Reproducible dev environments defined as code. TypeScript.
+- [zinc](https://ossl.dev/projects/zinc): Cross-language shared memory in Rust. Bindings for C, Python, Node, Go.
+- [pylon](https://ossl.dev/projects/pylon): API versioning without restructuring your codebase. TypeScript.
+- [differens](https://ossl.dev/projects/differens): A diff engine that tells you what actually happened to your code. TypeScript.
 
 ## Community
 
 - [GitHub](https://github.com/ossl-dev)
-- [Discussions](https://github.com/ossl-dev/discussions)
 
 ## Optional
 

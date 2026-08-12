@@ -39,7 +39,7 @@
 </svelte:head>
 
 <section class="page-hero" aria-labelledby="projects-heading">
-    <h1 id="projects-heading">Our <span class="accent">projects</span></h1>
+    <h1 id="projects-heading">The <span class="accent">work</span></h1>
     <p class="page-sub">
         Each project tackles a specific problem. No sprawling frameworks. No
         unnecessary abstractions.
@@ -97,6 +97,7 @@
 
     .accent {
         color: var(--accent);
+        font-style: italic;
     }
 
     .page-sub {
@@ -119,7 +120,7 @@
 
     .projects-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
     }
 
@@ -172,12 +173,6 @@
             animation-duration: 0.01ms !important;
             animation-iteration-count: 1 !important;
             transition-duration: 0.01ms !important;
-        }
-    }
-
-    @media (max-width: 768px) {
-        .projects-grid {
-            grid-template-columns: repeat(2, 1fr);
         }
     }
 

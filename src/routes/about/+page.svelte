@@ -2,12 +2,12 @@
     <title>About - OSS Labs</title>
     <meta
         name="description"
-        content="Learn about OSS Labs, a community of open source engineers. How we work, what we believe, and how to get involved."
+        content="OSS Labs is a community of open source engineers building developer tools in public. How it works and how to get involved."
     />
     <meta property="og:title" content="About - OSS Labs" />
     <meta
         property="og:description"
-        content="Learn about OSS Labs, a community of open source engineers. How we work and how to get involved."
+        content="OSS Labs is a community of open source engineers building developer tools in public. How it works and how to get involved."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://ossl.dev/about" />
@@ -34,52 +34,44 @@
 <section class="section section-narrow">
     <div class="prose">
         <p class="lead">
-            We are a small group of engineers who build and maintain open source
-            developer tools. No investors, no growth targets, no enterprise
-            sales pipeline. Just good work, done carefully, in public.
+            OSS Labs is a small group of engineers building and maintaining open
+            source developer tools. No investors, no growth targets, no
+            enterprise sales pipeline. Just careful work, done in public.
         </p>
         <p>
-            Each project starts from a real problem we encountered while
-            building software. We keep scope tight, review code thoroughly, and
-            bring on contributors who demonstrate good judgment. If that sounds
-            like how you like to work, come take a look at the repos.
+            Each project starts from a real problem encountered while building
+            software. Scope stays tight, code gets reviewed thoroughly, and
+            contributors who show good judgment get invited in. If that's how
+            work should feel, the repos are open.
         </p>
     </div>
 </section>
 
 <section class="section" aria-labelledby="principles-heading">
-    <h2 id="principles-heading" class="sr-only">How we work</h2>
+    <h2 id="principles-heading" class="sr-only">How it works</h2>
     <div class="principles">
         <div class="principle">
             <h3>Solve real problems</h3>
             <p>
                 Every project here exists because someone needed it badly enough
-                to build it. We do not chase trends or rewrite things because a
-                new framework dropped.
+                to build it. Trends don't get chased, and working code doesn't
+                get rewritten because a new framework dropped.
             </p>
         </div>
         <div class="principle">
             <h3>Small is a feature</h3>
             <p>
-                We prefer libraries that do one thing well over frameworks that
-                do everything adequately. Less code means fewer bugs, faster
+                Libraries that do one thing well beat frameworks that do
+                everything adequately. Less code means fewer bugs, faster
                 reviews, and simpler upgrades.
-            </p>
-        </div>
-        <div class="principle">
-            <h3>Review is where the work happens</h3>
-            <p>
-                The best code comes from patient, thorough review. We treat PR
-                feedback as collaboration, not criticism. Good reviewers are as
-                valuable as good authors.
             </p>
         </div>
         <div class="principle">
             <h3>Earn the keys</h3>
             <p>
-                Write code, review PRs, help with issues. Do that consistently
-                and thoughtfully, and you get commit access. No hiring
-                committee, no politics.
+                Write code, review PRs, help with issues. Do all three
+                consistently and commit access follows. No hiring committee, no
+                politics.
             </p>
         </div>
     </div>
@@ -87,7 +79,7 @@
 
 <section class="section section-narrow" aria-labelledby="join-heading">
     <div class="cta">
-        <h2 id="join-heading">Join us</h2>
+        <h2 id="join-heading">Get involved</h2>
         <p>
             Star the repos, open an issue, submit a PR. Good contributions get
             noticed, and good contributors get commit access.
@@ -129,6 +121,7 @@
 
     .accent {
         color: var(--accent);
+        font-style: italic;
     }
 
     .section {

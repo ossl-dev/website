@@ -51,15 +51,15 @@
 <section class="hero" aria-labelledby="hero-heading">
     <div class="hero-content">
         <h1 id="hero-heading">
-            We build developer tools
+            Building developer tools
             <span class="accent">in the open</span>.
         </h1>
         <p class="hero-desc">
-            A community of open source engineers building projects together. We
-            focus on problems we understand deeply.
+            Built by engineers who use them. Real problems, careful APIs, no
+            hype.
         </p>
         <div class="hero-actions">
-            <a href="/projects" class="btn-primary">See our work</a>
+            <a href="/projects" class="btn-primary">See the work</a>
             <a href="/about" class="btn-ghost">About the community</a>
         </div>
     </div>
@@ -67,7 +67,7 @@
 
 <section class="section" aria-labelledby="projects-heading">
     <div class="section-header">
-        <p class="section-label">What we build</p>
+        <p class="section-label">The work</p>
         <h2 id="projects-heading">Featured projects</h2>
     </div>
     <div class="projects-grid" role="list">
@@ -86,28 +86,27 @@
 </section>
 
 <section class="section" aria-labelledby="values-heading">
-    <h2 id="values-heading" class="sr-only">How we work</h2>
+    <div class="section-header">
+        <p class="section-label">Principles</p>
+        <h2 id="values-heading">How it works</h2>
+    </div>
     <div class="values-row">
         <div class="value">
-            <span class="value-number" aria-hidden="true">01</span>
             <h3>Correct first, fast later</h3>
             <p>
-                We prefer getting the API right over shipping quickly. Breaking
-                changes are expensive. We take the time to think through edge
-                cases before cutting a release.
+                Getting the API right beats shipping quickly. Breaking changes
+                are expensive. Edge cases get thought through before a release.
             </p>
         </div>
         <div class="value">
-            <span class="value-number" aria-hidden="true">02</span>
             <h3>Small surface area</h3>
             <p>
-                Each project solves one problem well. We resist feature creep
-                and scope expansion. A small, focused library beats a sprawling
-                framework every time.
+                Each project solves one problem well. Feature creep gets
+                refused. A small, focused library beats a sprawling framework
+                every time.
             </p>
         </div>
         <div class="value">
-            <span class="value-number" aria-hidden="true">03</span>
             <h3>Contribution drives ownership</h3>
             <p>
                 Write good code, review PRs thoughtfully, help triage issues. Do
@@ -120,11 +119,13 @@
 
 <section class="section section-narrow" aria-labelledby="cta-heading">
     <div class="cta-card">
-        <h2 id="cta-heading">Come build with us</h2>
-        <p>
-            Star the projects that interest you. Open an issue. Submit a PR.
-            Every contribution moves the community forward.
-        </p>
+        <div>
+            <h2 id="cta-heading">Come build</h2>
+            <p>
+                Star the projects that interest you. Open an issue. Submit a
+                PR. Good work gets merged.
+            </p>
+        </div>
         <a
             href="https://github.com/ossl-dev"
             target="_blank"
@@ -141,7 +142,7 @@
                     d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"
                 /></svg
             >
-            Join us on GitHub
+            Contribute on GitHub
         </a>
     </div>
 </section>
@@ -172,6 +173,7 @@
 
     .accent {
         color: var(--accent);
+        font-style: italic;
     }
 
     .hero-desc {
@@ -275,7 +277,7 @@
 
     .projects-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
     }
 
@@ -285,13 +287,9 @@
         gap: 2rem;
     }
 
-    .value-number {
-        font-family: var(--font-mono);
-        font-size: 0.71875rem;
-        color: var(--accent);
-        opacity: 0.7;
-        display: block;
-        margin-bottom: 0.5rem;
+    .value {
+        border-top: 1px solid var(--border-subtle);
+        padding-top: 1.25rem;
     }
 
     .value h3 {
@@ -310,7 +308,11 @@
     }
 
     .cta-card {
-        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+        text-align: left;
         padding: 3rem 2rem;
         border: 1px solid var(--border-subtle);
         border-radius: var(--radius-lg);
@@ -326,10 +328,14 @@
         margin-bottom: 0.625rem;
     }
 
+    .cta-card .btn-primary {
+        flex-shrink: 0;
+    }
+
     .cta-card p {
         color: var(--text-secondary);
         max-width: 480px;
-        margin: 0 auto 1.25rem;
+        margin: 0;
         font-size: 0.9375rem;
         line-height: 1.6;
     }
@@ -344,11 +350,6 @@
         }
     }
 
-    @media (max-width: 768px) {
-        .projects-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
     @media (max-width: 640px) {
         .hero h1 {
             font-size: clamp(2rem, 8vw, 3rem);
@@ -362,6 +363,11 @@
         }
         .projects-grid {
             grid-template-columns: 1fr;
+        }
+        .cta-card {
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
         }
     }
 </style>

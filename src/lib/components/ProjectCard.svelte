@@ -54,7 +54,7 @@
     flex-direction: column;
     height: 100%;
     gap: 0.625rem;
-    padding: 1.5rem;
+    padding: 1.75rem;
     background: var(--bg-elevated);
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-lg);
@@ -98,9 +98,9 @@
   }
 
   .card p {
-    font-size: 0.875rem;
+    font-size: 0.9375rem;
     color: var(--text-secondary);
-    line-height: 1.55;
+    line-height: 1.6;
     flex: 1;
   }
 

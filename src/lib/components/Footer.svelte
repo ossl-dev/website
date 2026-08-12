@@ -16,7 +16,7 @@
                 <span>OSS Labs</span>
             </a>
             <p class="footer-tagline">
-                A community of open source engineers building projects together.
+                Open source developer tools, built in public.
             </p>
         </div>
 
@@ -25,6 +25,7 @@
                 <h2 class="footer-heading">Site</h2>
                 <a href="/">Home</a>
                 <a href="/projects">Projects</a>
+                <a href="/blog">Blog</a>
                 <a href="/about">About</a>
             </div>
             <div class="footer-col">

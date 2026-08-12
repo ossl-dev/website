@@ -4,24 +4,24 @@
 
 ## Overview
 
-Founded as Open Vanguard, OSS Labs operates under ossl.dev. The GitHub organization is github.com/ossl-dev.
+OSS Labs operates under ossl.dev. The GitHub organization is github.com/ossl-dev.
 
 ## Mission
 
-We build open source tools that solve real problems. Each project exists because someone needed it badly enough to build it.
+Open source tools that solve real problems. Each project exists because someone needed it badly enough to build it.
 
-## How We Work
+## How It Works
 
-1. **Solve real problems.** We do not chase trends or rewrite things because a new framework dropped.
-2. **Small is a feature.** Libraries that do one thing well over frameworks that do everything adequately.
-3. **Review is where the work happens.** Patient, thorough code review produces better software.
-4. **Earn the keys.** Write code, review PRs, help with issues. Consistent quality work earns commit access.
+1. **Solve real problems.** Trends don't get chased, and working code doesn't get rewritten because a new framework dropped.
+2. **Small is a feature.** Libraries that do one thing well beat frameworks that do everything adequately.
+3. **Earn the keys.** Write code, review PRs, help with issues. Do all three consistently and commit access follows.
 
 ## Projects
 
-- [genesis](https://github.com/ossl-dev/genesis): Declarative, cross-platform developer environment provisioning engine. TypeScript.
-- [zinc](https://zinc.ossl.dev): Universal Shared Memory. High-performance shared memory library in Rust with bindings for C, Python, Node, and Go.
-- [pylon](https://github.com/ossl-dev/pylon): Dead simple API versioning. Works with Express, Fastify, Hono, and anything middleware-shaped. TypeScript.
+- [genesis](https://ossl.dev/projects/genesis): Reproducible dev environments defined as code. One command to provision the exact same toolchain, SDKs, and config across any machine. TypeScript. Docs: genesis-docs.vercel.app.
+- [zinc](https://ossl.dev/projects/zinc): Cross-language shared memory in Rust. Zero-copy data sharing between processes with bindings for C, Python, Node, and Go. Rust. Docs: zinc.ossl.dev.
+- [pylon](https://ossl.dev/projects/pylon): API versioning that does not require restructuring your codebase. Works with Express, Fastify, Hono, and anything shaped like middleware. TypeScript.
+- [differens](https://ossl.dev/projects/differens): A diff engine that tells you what actually happened to your code, moved, renamed, extracted, reformatted, instead of which lines changed. Algorithm-first, AI-optional, works with or without git. TypeScript. Docs: differens.ossl.dev. npm: differens.
 
 ## Tech Stack
 
@@ -33,7 +33,6 @@ We build open source tools that solve real problems. Each project exists because
 ## Community
 
 - [GitHub](https://github.com/ossl-dev)
-- [Discussions](https://github.com/ossl-dev/discussions)
 
 ## Optional
 

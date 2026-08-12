@@ -36,9 +36,9 @@
         <p class="placeholder-mark" aria-hidden="true">*</p>
         <h2>Coming soon</h2>
         <p>
-            We are gathering our thoughts. Expect technical deep dives, project
-            retrospectives, and honest reflections on what it means to build
-            software in the open.
+            Writing is in progress. Technical deep dives, project
+            retrospectives, and honest reflections on building software in the
+            open.
         </p>
         <a
             href="https://github.com/ossl-dev"

@@ -27,6 +27,7 @@
 
         <nav class="nav-links" aria-label="Main navigation">
             <a href="/projects">Projects</a>
+            <a href="/blog">Blog</a>
             <a href="/about">About</a>
         </nav>
 
