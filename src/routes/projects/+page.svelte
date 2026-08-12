@@ -1,40 +1,6 @@
 <script lang="ts">
     import ProjectCard from "$lib/components/ProjectCard.svelte";
-
-    const projects = [
-        {
-            name: "genesis",
-            description:
-                "Declarative, cross-platform developer environment provisioning. Define your toolchain, SDKs, and config as code. One command to recreate the exact same environment everywhere.",
-            language: "TypeScript",
-            url: "https://github.com/ossl-dev/genesis",
-            topics: ["developer-tools", "devops", "dx", "cross-platform"],
-        },
-        {
-            name: "zinc",
-            description:
-                "Universal Shared Memory. A high-performance shared memory library in Rust with bindings for C, Python, Node, and Go. Zero-copy data sharing across language boundaries.",
-            language: "Rust",
-            url: "https://zinc.ossl.dev",
-            topics: ["memory", "systems", "cross-language", "ffi"],
-        },
-        {
-            name: "pylon",
-            description:
-                "Dead simple API versioning. Works with Express, Fastify, Hono, and anything middleware-shaped. Clean routing, minimal overhead, no codebase restructuring required.",
-            language: "TypeScript",
-            url: "https://github.com/ossl-dev/pylon",
-            topics: ["api", "versioning", "backend", "http"],
-        },
-        {
-            name: "differens",
-            description:
-                "A diff engine that tells you what actually happened to your code, moved, renamed, extracted, reformatted, instead of which lines changed. Algorithm-first, AI-optional, works with or without git.",
-            language: "TypeScript",
-            url: "https://differens.ossl.dev",
-            topics: ["diff", "analysis", "developer-tools", "refactoring"],
-        },
-    ];
+    import { projects } from "$lib/projects";
 </script>
 
 <svelte:head>
@@ -85,7 +51,10 @@
     <div class="projects-grid" role="list">
         {#each projects as project}
             <div role="listitem">
-                <ProjectCard {...project} />
+                <ProjectCard
+                    {...project}
+                    href={`/projects/${project.slug}`}
+                />
             </div>
         {/each}
     </div>

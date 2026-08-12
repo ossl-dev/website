@@ -4,11 +4,11 @@
     description: string;
     language: string;
     stars: number;
-    url: string;
+    href: string;
     topics?: string[];
   }
 
-  let { name, description, language, stars, url, topics = [] }: Props = $props();
+  let { name, description, language, stars, href, topics = [] }: Props = $props();
 
   const langColors: Record<string, string> = {
     TypeScript: '#3178c6',
@@ -20,7 +20,7 @@
   };
 </script>
 
-<a href={url} target="_blank" rel="noopener noreferrer" class="card">
+<a {href} class="card">
   <div class="card-top">
     <h3>{name}</h3>
     {#if stars > 0}
