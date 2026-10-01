@@ -1,82 +1,20 @@
 <script lang="ts">
-    import { onMount, tick } from "svelte";
-    import { marked } from "marked";
-    import type { Project } from "$lib/projects";
+    import { tick } from "svelte";
+    import { repoUrls, type Project } from "$lib/projects";
 
     let { data } = $props();
     const project: Project = $derived(data.project);
+    const repo = $derived(repoUrls(project));
+    const readmeHtml = $derived(data.readmeHtml);
+    const headings = $derived(data.headings);
 
-    // ponytail: assumes default branch "main"; all ossl-dev repos use main
-    const rawBase = `https://raw.githubusercontent.com/${project.repo}/main`;
-    const githubBase = `https://github.com/${project.repo}`;
-
-    let status = $state<"loading" | "ready" | "error">("loading");
-    let readme = $state("");
-    let headings = $state<{ id: string; text: string; level: number }[]>([]);
     let activeId = $state("");
     let observer: IntersectionObserver | undefined;
-
-    function slugify(text: string, used: Map<string, number>): string {
-        const base =
-            text
-                .toLowerCase()
-                .replace(/[^a-z0-9]+/g, "-")
-                .replace(/^-+|-+$/g, "") || "section";
-        const n = used.get(base) ?? 0;
-        used.set(base, n + 1);
-        return n === 0 ? base : `${base}-${n + 1}`;
-    }
-
-    onMount(async () => {
-        try {
-            const res = await fetch(`${rawBase}/README.md`);
-            if (!res.ok) throw new Error(`HTTP ${res.status}`);
-            const md = await res.text();
-            // the page header owns the title; drop the README's first h1
-            const body = md.replace(/^#\s+[^\n]+/, "");
-            const html = marked.parse(body, { async: false }) as string;
-
-            const doc = new DOMParser().parseFromString(html, "text/html");
-            const used = new Map<string, number>();
-            doc.querySelectorAll("a").forEach((a) => {
-                const href = a.getAttribute("href") ?? "";
-                if (/^(https?:|mailto:|#)/.test(href)) {
-                    if (/^https?:/.test(href)) {
-                        a.setAttribute("target", "_blank");
-                        a.setAttribute("rel", "noopener noreferrer");
-                    }
-                    return;
-                }
-                const [path, ...frag] = href.split("#");
-                a.setAttribute(
-                    "href",
-                    `${githubBase}/blob/main/${path}${frag.length ? `#${frag.join("#")}` : ""}`
-                );
-                a.setAttribute("target", "_blank");
-                a.setAttribute("rel", "noopener noreferrer");
-            });
-            doc.querySelectorAll("img").forEach((img) => {
-                const src = img.getAttribute("src") ?? "";
-                if (/^https?:/.test(src)) return;
-                img.setAttribute("src", `${rawBase}/${src.replace(/^\.\//, "")}`);
-            });
-            doc.querySelectorAll("h2, h3").forEach((el, i) => {
-                const id = slugify(el.textContent ?? "", used);
-                el.setAttribute("id", id);
-                headings.push({ id, text: el.textContent ?? "", level: el.tagName === "H2" ? 2 : 3 });
-            });
-
-            readme = doc.body.innerHTML;
-            status = "ready";
-        } catch {
-            status = "error";
-        }
-    });
 
     // scroll spy on README headings; highlight current section in the rail
     // ponytail: last intersecting entry wins — fine for short READMEs
     $effect(() => {
-        if (status !== "ready") return;
+        if (!readmeHtml) return;
         tick().then(() => {
             observer = new IntersectionObserver(
                 (entries) => {
@@ -121,17 +59,15 @@
 
     <div class="links">
         <a
-            href={githubBase}
+            href={repo.page}
             target="_blank"
             rel="noopener noreferrer"
             class="btn btn-primary"
         >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
-                ><path
-                    d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"
-                /></svg
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+                ><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg
             >
-            GitHub
+            {repo.label}
         </a>
         {#if project.docsUrl}
             <a
@@ -177,33 +113,24 @@
 
 <div class="layout">
     <article class="readme" aria-label={`${project.name} README`}>
-        {#if status === "loading"}
-            <div class="skeleton" aria-label="Loading README">
-                <div class="sk sk-w60"></div>
-                <div class="sk"></div>
-                <div class="sk"></div>
-                <div class="sk sk-w80"></div>
-                <div class="sk"></div>
-                <div class="sk sk-w40"></div>
-            </div>
-        {:else if status === "error"}
+        {#if readmeHtml}
+            {@html readmeHtml}
+        {:else}
             <div class="error">
                 <h2>Couldn't load the README</h2>
                 <p>
-                    The README lives on GitHub and it didn't come through. Try
-                    again in a moment, or read it there instead.
+                    The README lives on {repo.label} and it didn't come through
+                    at build time. Read it there instead.
                 </p>
                 <a
-                    href={githubBase}
+                    href={repo.page}
                     target="_blank"
                     rel="noopener noreferrer"
                     class="btn btn-primary"
                 >
-                    Read it on GitHub
+                    Read it on {repo.label}
                 </a>
             </div>
-        {:else}
-            {@html readme}
         {/if}
     </article>
 
@@ -545,44 +472,6 @@
     .readme :global(strong) {
         color: var(--text-primary);
         font-weight: 600;
-    }
-
-    /* --- loading skeleton --- */
-    .skeleton {
-        display: flex;
-        flex-direction: column;
-        gap: 0.875rem;
-        padding-top: 0.5rem;
-    }
-
-    .sk {
-        height: 1rem;
-        border-radius: var(--radius-sm);
-        background: var(--bg-elevated);
-        animation: pulse 1.4s ease-in-out infinite;
-    }
-
-    .sk-w60 {
-        width: 60%;
-        height: 1.75rem;
-    }
-
-    .sk-w80 {
-        width: 80%;
-    }
-
-    .sk-w40 {
-        width: 40%;
-    }
-
-    @keyframes pulse {
-        0%,
-        100% {
-            opacity: 0.5;
-        }
-        50% {
-            opacity: 1;
-        }
     }
 
     /* --- error state --- */

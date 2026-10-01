@@ -1,14 +1,41 @@
+export type Forge = "github" | "codeberg";
+
 export interface Project {
     slug: string;
     name: string;
     description: string;
     language: string;
     stars: number;
-    repo: string; // "org/repo" on GitHub
+    repo: string; // "org/repo"
+    forge?: Forge; // default "github"
     docsUrl?: string;
     packageUrl?: string;
     packageLabel?: string;
     topics: string[];
+}
+
+export interface RepoUrls {
+    label: string;
+    page: string;
+    rawBase: string;
+    blobBase: string;
+}
+
+export function repoUrls(p: Project): RepoUrls {
+    if ((p.forge ?? "github") === "codeberg") {
+        return {
+            label: "Codeberg",
+            page: `https://codeberg.org/${p.repo}`,
+            rawBase: `https://codeberg.org/${p.repo}/raw/branch/main`,
+            blobBase: `https://codeberg.org/${p.repo}/src/branch/main`,
+        };
+    }
+    return {
+        label: "GitHub",
+        page: `https://github.com/${p.repo}`,
+        rawBase: `https://raw.githubusercontent.com/${p.repo}/main`,
+        blobBase: `https://github.com/${p.repo}/blob/main`,
+    };
 }
 
 export const projects: Project[] = [
@@ -56,5 +83,16 @@ export const projects: Project[] = [
         packageUrl: "https://www.npmjs.com/package/differens",
         packageLabel: "npm",
         topics: ["diff", "analysis", "developer-tools"],
+    },
+    {
+        slug: "carrot",
+        name: "carrot",
+        description:
+            "Document engine for Rust applications. Manages editable data, undo/redo history, project files, and crash recovery for diagram editors, drawing tools, and map editors.",
+        language: "Rust",
+        stars: 0,
+        repo: "oss-labs/carrot",
+        forge: "codeberg",
+        topics: ["documents", "editor", "crash-recovery"],
     },
 ];
