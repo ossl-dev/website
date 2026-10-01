@@ -66,9 +66,9 @@
 >
     <h2 id="contribute-heading">Your turn</h2>
     <p>
-        All projects welcome contributors. First timers and experienced
-        maintainers alike. Find an issue that interests you, start a discussion,
-        or propose something new.
+        All of these take contributions, whether it is your first patch or your
+        hundredth. Find an issue that interests you, start a discussion, or
+        propose something new.
     </p>
     <a
         href="https://github.com/ossl-dev"

@@ -1,35 +1,9 @@
 <script lang="ts">
-    import { tick } from "svelte";
     import { repoUrls, type Project } from "$lib/projects";
 
     let { data } = $props();
     const project: Project = $derived(data.project);
     const repo = $derived(repoUrls(project));
-    const readmeHtml = $derived(data.readmeHtml);
-    const headings = $derived(data.headings);
-
-    let activeId = $state("");
-    let observer: IntersectionObserver | undefined;
-
-    // scroll spy on README headings; highlight current section in the rail
-    // ponytail: last intersecting entry wins — fine for short READMEs
-    $effect(() => {
-        if (!readmeHtml) return;
-        tick().then(() => {
-            observer = new IntersectionObserver(
-                (entries) => {
-                    for (const e of entries) {
-                        if (e.isIntersecting) activeId = e.target.id;
-                    }
-                },
-                { rootMargin: "-15% 0px -75% 0px" }
-            );
-            document
-                .querySelectorAll(".readme h2[id], .readme h3[id]")
-                .forEach((el) => observer!.observe(el));
-        });
-        return () => observer?.disconnect();
-    });
 </script>
 
 <svelte:head>
@@ -54,7 +28,14 @@
 
 <header class="page-head">
     <a href="/projects" class="back">← All projects</a>
-    <h1>{project.name}</h1>
+
+    <div class="title">
+        <h1>{project.name}</h1>
+        {#if project.status}
+            <span class="status">{project.status}</span>
+        {/if}
+    </div>
+
     <p class="desc">{project.description}</p>
 
     <div class="links">
@@ -98,10 +79,8 @@
     </div>
 
     <p class="meta">
-        <span class="lang">
-            <span class="lang-dot" aria-hidden="true"></span>
-            {project.language}
-        </span>
+        <span class="lang-dot" aria-hidden="true"></span>
+        <span>{project.language}</span>
         {#if project.stars > 0}
             <span class="sep" aria-hidden="true">·</span>
             <span>{project.stars} stars</span>
@@ -111,52 +90,23 @@
     </p>
 </header>
 
-<div class="layout">
-    <article class="readme" aria-label={`${project.name} README`}>
-        {#if readmeHtml}
-            {@html readmeHtml}
-        {:else}
-            <div class="error">
-                <h2>Couldn't load the README</h2>
-                <p>
-                    The README lives on {repo.label} and it didn't come through
-                    at build time. Read it there instead.
-                </p>
-                <a
-                    href={repo.page}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="btn btn-primary"
-                >
-                    Read it on {repo.label}
-                </a>
-            </div>
-        {/if}
-    </article>
+<div class="page-body">
+    <section class="block" aria-labelledby="why-heading">
+        <h2 id="why-heading">Why it exists</h2>
+        <p>{project.why}</p>
+    </section>
 
-    {#if headings.length > 1}
-        <aside class="toc" aria-label="README sections">
-            <p class="toc-label">Readme</p>
-            <nav>
-                {#each headings as h}
-                    <a
-                        href={`#${h.id}`}
-                        class:active={activeId === h.id}
-                        class:sub={h.level === 3}
-                    >
-                        {h.text}
-                    </a>
-                {/each}
-            </nav>
-        </aside>
-    {/if}
+    <section class="block" aria-labelledby="detail-heading">
+        <h2 id="detail-heading">What it does</h2>
+        <p>{project.detail}</p>
+    </section>
 </div>
 
 <style>
     .page-head {
         max-width: var(--content-width);
         margin: 0 auto;
-        padding: 7rem 1.5rem 3rem;
+        padding: 7rem 1.5rem 3.5rem;
     }
 
     .back {
@@ -173,6 +123,16 @@
         color: var(--accent);
     }
 
+    /* name and status share a baseline so the chip sits on the display type,
+       not floating in the middle of it */
+    .title {
+        display: flex;
+        align-items: baseline;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-bottom: 1.125rem;
+    }
+
     h1 {
         font-family: var(--font-display);
         font-size: clamp(2.75rem, 6vw, 4.25rem);
@@ -180,7 +140,18 @@
         letter-spacing: -0.03em;
         line-height: 1.05;
         color: var(--text-primary);
-        margin-bottom: 1rem;
+    }
+
+    .status {
+        font-size: 0.75rem;
+        line-height: 1;
+        letter-spacing: 0.01em;
+        padding: 0.3125rem 0.6875rem;
+        border-radius: 100px;
+        color: var(--accent);
+        background: var(--accent-soft);
+        border: 1px solid rgba(212, 165, 116, 0.28);
+        white-space: nowrap;
     }
 
     .desc {
@@ -241,12 +212,6 @@
         color: var(--text-muted);
     }
 
-    .lang {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.375rem;
-    }
-
     .lang-dot {
         width: 7px;
         height: 7px;
@@ -259,241 +224,36 @@
         opacity: 0.5;
     }
 
-    .layout {
+    /* one hairline per block, prose held to a readable measure */
+    .page-body {
         max-width: var(--content-width);
         margin: 0 auto;
         padding: 0 1.5rem var(--section-gap);
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) 220px;
-        gap: 3rem;
-        align-items: start;
     }
 
-    .toc {
-        position: sticky;
-        top: 6rem;
-        max-height: calc(100vh - 9rem);
-        overflow-y: auto;
-        padding-left: 1.25rem;
-        border-left: 1px solid var(--border-subtle);
+    .block {
+        max-width: 68ch;
+        border-top: 1px solid var(--border-subtle);
+        padding-top: 2rem;
     }
 
-    .toc-label {
-        font-family: var(--font-mono);
-        font-size: 0.65625rem;
-        text-transform: uppercase;
-        letter-spacing: 0.12em;
-        color: var(--text-muted);
-        margin-bottom: 0.75rem;
+    .block + .block {
+        margin-top: 3.5rem;
     }
 
-    .toc a {
-        display: block;
-        font-family: var(--font-mono);
-        font-size: 0.71875rem;
-        line-height: 1.45;
-        color: var(--text-secondary);
-        padding: 0.25rem 0 0.25rem 0.625rem;
-        border-left: 2px solid transparent;
-        transition: color 0.15s, border-color 0.15s;
-    }
-
-    .toc a.sub {
-        padding-left: 1.375rem;
-        font-size: 0.6875rem;
-        color: var(--text-muted);
-    }
-
-    .toc a:hover,
-    .toc a:focus-visible {
-        color: var(--text-primary);
-    }
-
-    .toc a.active {
-        color: var(--accent);
-        border-left-color: var(--accent);
-    }
-
-    /* --- rendered README prose --- */
-    .readme {
-        min-width: 0;
-        font-size: 0.96875rem;
-    }
-
-    .readme :global(h1),
-    .readme :global(h2),
-    .readme :global(h3),
-    .readme :global(h4) {
-        color: var(--text-primary);
-        scroll-margin-top: 6rem;
-    }
-
-    .readme :global(h2) {
+    .block h2 {
         font-family: var(--font-display);
-        font-size: 1.625rem;
+        font-size: 1.25rem;
         font-weight: 550;
-        letter-spacing: -0.015em;
-        border-top: 1px solid var(--border-subtle);
-        padding-top: 2.5rem;
-        margin: 3.5rem 0 1rem;
+        letter-spacing: -0.01em;
+        color: var(--text-primary);
+        margin-bottom: 0.875rem;
     }
 
-    .readme :global(h2:first-child) {
-        border-top: none;
-        padding-top: 0;
-        margin-top: 0;
-    }
-
-    .readme :global(h3) {
-        font-size: 1.1875rem;
-        font-weight: 600;
-        margin: 2.25rem 0 0.75rem;
-    }
-
-    .readme :global(h4) {
+    .block p {
         font-size: 1rem;
-        font-weight: 600;
-        margin: 1.5rem 0 0.5rem;
-    }
-
-    .readme :global(p) {
-        color: var(--text-secondary);
         line-height: 1.75;
-        margin: 0 0 1rem;
-    }
-
-    .readme :global(ul),
-    .readme :global(ol) {
         color: var(--text-secondary);
-        line-height: 1.7;
-        margin: 0 0 1rem;
-        padding-left: 1.5rem;
-    }
-
-    .readme :global(li) {
-        margin: 0.25rem 0;
-    }
-
-    .readme :global(li > p) {
-        margin: 0;
-    }
-
-    .readme :global(a) {
-        color: var(--accent);
-        text-decoration: underline;
-        text-underline-offset: 3px;
-        text-decoration-color: rgba(212, 165, 116, 0.4);
-        transition: text-decoration-color 0.2s;
-    }
-
-    .readme :global(a:hover),
-    .readme :global(a:focus-visible) {
-        text-decoration-color: var(--accent);
-    }
-
-    .readme :global(code) {
-        font-family: var(--font-mono);
-        font-size: 0.8125rem;
-        background: var(--bg-elevated);
-        border: 1px solid var(--border-subtle);
-        border-radius: var(--radius-sm);
-        padding: 0.125rem 0.375rem;
-        color: #e8dfd4;
-    }
-
-    .readme :global(pre) {
-        background: #14100c;
-        border: 1px solid var(--border-subtle);
-        border-radius: var(--radius-md);
-        padding: 1rem 1.125rem;
-        overflow-x: auto;
-        margin: 0 0 1.25rem;
-        max-width: 100%;
-    }
-
-    .readme :global(pre code) {
-        background: none;
-        border: none;
-        padding: 0;
-        font-size: 0.8125rem;
-        line-height: 1.65;
-        color: #d8d2c9;
-    }
-
-    .readme :global(blockquote) {
-        border-left: 2px solid var(--accent);
-        opacity: 0.85;
-        padding: 0.125rem 0 0.125rem 1rem;
-        margin: 0 0 1rem;
-    }
-
-    .readme :global(blockquote p) {
-        margin: 0;
-    }
-
-    .readme :global(table) {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 0 0 1.25rem;
-        font-size: 0.875rem;
-    }
-
-    .readme :global(th) {
-        font-family: var(--font-mono);
-        font-size: 0.71875rem;
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
-        text-align: left;
-        color: var(--text-muted);
-        border-bottom: 1px solid var(--border-default);
-        padding: 0.5rem 0.75rem;
-    }
-
-    .readme :global(td) {
-        color: var(--text-secondary);
-        border-bottom: 1px solid var(--border-subtle);
-        padding: 0.5rem 0.75rem;
-    }
-
-    .readme :global(img) {
-        max-width: 100%;
-        height: auto;
-        border-radius: var(--radius-md);
-        border: 1px solid var(--border-subtle);
-        margin: 0.5rem 0;
-    }
-
-    .readme :global(hr) {
-        border: none;
-        border-top: 1px solid var(--border-subtle);
-        margin: 2.5rem 0;
-    }
-
-    .readme :global(strong) {
-        color: var(--text-primary);
-        font-weight: 600;
-    }
-
-    /* --- error state --- */
-    .error {
-        border: 1px solid var(--border-subtle);
-        border-radius: var(--radius-lg);
-        background: var(--bg-surface);
-        padding: 2.5rem;
-        text-align: center;
-    }
-
-    .error h2 {
-        font-family: var(--font-display);
-        font-size: 1.5rem;
-        color: var(--text-primary);
-        margin-bottom: 0.5rem;
-    }
-
-    .error p {
-        color: var(--text-secondary);
-        max-width: 400px;
-        margin: 0 auto 1.5rem;
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -503,16 +263,6 @@
             animation-duration: 0.01ms !important;
             animation-iteration-count: 1 !important;
             transition-duration: 0.01ms !important;
-        }
-    }
-
-    @media (max-width: 1000px) {
-        .layout {
-            grid-template-columns: 1fr;
-        }
-
-        .toc {
-            display: none;
         }
     }
 
